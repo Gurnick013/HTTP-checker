@@ -1,33 +1,31 @@
-// import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { FC } from "react";
-
-interface IGetUrl {
-  getUrl: any;
-}
+import { IGetUrl } from "../constants/constants";
 
 const TableHttp: FC<IGetUrl> = (value) => {
   const domainName = value.getUrl;
-  console.log(value.getUrl);
-  const [status, setStatus] = useState("");
 
+  const [status, setStatus] = useState("");
+  console.log(status);
   useEffect(() => {
-    fetch(`https://${domainName}`, {
+    fetch(`https://www.${domainName}`, {
       mode: "no-cors",
       headers: {
         "Access-Control-Allow-Origin": "*",
-        'Access-Control-Allow-Headers': "Origin, X-Requested-With, Content-Type, Accept"
+        "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type, Accept",
       },
     })
-      .then((res) => {
+      .then((res: any) => {
         console.log(res);
+        setStatus(res.type);
       })
-      .then((result: any) => setStatus(result))
       .catch((err) => {
         console.log(err);
       });
   }, [domainName]);
+  console.log(status);
 
   return <div>{status}</div>;
 };

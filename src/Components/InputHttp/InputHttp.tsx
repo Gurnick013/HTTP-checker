@@ -6,7 +6,7 @@ const { Search } = Input;
 
 
 const InputHttp: FC = () => {
-  const [domain, setDomain] = useState('google.com');
+  const [domain, setDomain] = useState('');
   
   const onSearch = (value: any) => setDomain(value);
 
