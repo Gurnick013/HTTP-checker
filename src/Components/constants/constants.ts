@@ -1,3 +1,3 @@
 export interface IGetUrl {
-    getUrl: any;
+    getUrl: string;
   }

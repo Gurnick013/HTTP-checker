@@ -1,33 +1,42 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { FC } from "react";
+import { Descriptions, Badge } from "antd";
+import { FC, useEffect } from "react";
 import { IGetUrl } from "../constants/constants";
+import "antd/dist/antd.css";
 
-const TableHttp: FC<IGetUrl> = (value) => {
-  const domainName = value.getUrl;
+const TableHttp: FC<IGetUrl> = () => {
+  const storage = Object.entries(localStorage);
 
-  const [status, setStatus] = useState("");
-  console.log(status);
   useEffect(() => {
-    fetch(`https://www.${domainName}`, {
-      mode: "no-cors",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers":
-          "Origin, X-Requested-With, Content-Type, Accept",
-      },
-    })
-      .then((res: any) => {
-        console.log(res);
-        setStatus(res.type);
+    storage.map(async (el) => {
+      return await fetch(`http://www.${el[1]}`, {
+        mode: "no-cors",
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [domainName]);
-  console.log(status);
+        .then((res: any) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }, [storage]);
 
-  return <div>{status}</div>;
+  const items = storage.map(
+    (el: Array<any>, index: number): JSX.Element | undefined => {
+      return (
+        <div key={index}>
+          <Descriptions.Item label={el[0]} span={3}>
+            <Badge status="processing" text={el[1]} />
+          </Descriptions.Item>
+        </div>
+      );
+    }
+  );
+
+  return (
+    <>
+      <div>{items}</div>
+    </>
+  );
 };
 
 export default TableHttp;
