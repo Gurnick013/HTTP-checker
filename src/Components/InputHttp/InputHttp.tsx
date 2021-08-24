@@ -7,8 +7,8 @@ import "antd/dist/antd.css";
 const { Search } = Input;
 
 const InputHttp: FC = () => {
-  const [domian, setDomian] = useState("");
-  const onSearch = (value: string) => {
+  const [domian, setDomian] = useState<string>("");
+  const onSearch = (value: string): void => {
     setDomian(value);
     localStorage.setItem(value.substring(0, value.indexOf(".")), value);
   };
@@ -25,7 +25,7 @@ const InputHttp: FC = () => {
           />
         </Space>
       </Tooltip>
-      {!localStorage.length ? (
+      {!localStorage.length  ? (
         <div>Таблица запросов пуста</div>
       ) : (
         <TableHttp getUrl={domian} />
