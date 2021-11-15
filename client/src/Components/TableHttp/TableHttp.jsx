@@ -1,20 +1,32 @@
 import { useEffect, useState } from "react";
-import queryUrl from "../../core/query";
+import { queryDataBase, queryUrl } from "../../core/query";
 import { Input, Space, Spin } from "antd";
+import Cards from "./Cards/Card";
+import "./TableHttp.css";
 
 const TableHttp = () => {
   const { Search } = Input;
-
+  const [data1, setData1] = useState(undefined);
   const [data, setData] = useState(undefined);
   const [url, setUrl] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-
+  console.log(data1);
   const onSearch = (value) => setUrl(value);
-  console.log(data);
+  console.log(data1);
+
+  useEffect(() => {
+    // setIsLoaded(true);
+    queryDataBase().then((res) => {
+      setData1(res);
+      // setIsLoaded(false);
+    });
+  }, []);
+
   useEffect(() => {
     if (url) {
       setIsLoaded(true);
       queryUrl(url).then((res) => {
+        // setData((prev) => (data ? [...prev, res.data] : [prev]));
         setData(res.data);
         setIsLoaded(false);
       });
@@ -23,7 +35,7 @@ const TableHttp = () => {
 
   return (
     <>
-      <h1>HTTP-Checker</h1>
+      <h1 className="title">HTTP-Checker</h1>
       <Space direction="vertical">
         <Search
           placeholder="input search text"
@@ -32,12 +44,9 @@ const TableHttp = () => {
         />
       </Space>
       {!isLoaded ? (
-        <h2>
-          {data &&
-            `${data.statusCode ? data.statusCode : ""} ${data.statusMessage}`}
-        </h2>
+        <div>{data && <Cards data={data} />}</div>
       ) : (
-        <Spin />
+        <Spin className="spin" />
       )}
     </>
   );
