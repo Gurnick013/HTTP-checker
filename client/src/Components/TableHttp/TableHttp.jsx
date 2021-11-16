@@ -10,18 +10,17 @@ const TableHttp = () => {
   const [data, setData] = useState(undefined);
   const [url, setUrl] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log(data1);
   const onSearch = (value) => setUrl(value);
-  console.log(data1);
-
+  
   useEffect(() => {
-    // setIsLoaded(true);
+    setIsLoaded(true);
     queryDataBase().then((res) => {
-      setData1(res);
-      // setIsLoaded(false);
+      setData1(res.data);
+      setIsLoaded(false);
     });
-  }, []);
+  }, []); 
 
+  console.log(data1);
   useEffect(() => {
     if (url) {
       setIsLoaded(true);

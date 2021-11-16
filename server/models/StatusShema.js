@@ -2,9 +2,15 @@ import mongoose from "mongoose";
 
 const StatusShema = mongoose.Schema(
   {
-    url: String,
-    statusCode: Number,
-    statusMessage: String,
+    url: {
+      type: String,
+    },
+    statusCode: {
+      type: Number,
+    },
+    statusMessage: {
+      type: String,
+    },
   },
   { versionKey: false }
 );

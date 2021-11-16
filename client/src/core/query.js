@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const queryUrl = async (string) => {
   try {
-    return await axios.get(`http://localhost:3000/?url=http://${string}`);
+    return await axios.get(`http://localhost:3000/?url=https://${string}`);
   } catch (e) {
     console.log(`Error! ${e}`);
   }
