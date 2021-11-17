@@ -1,9 +1,9 @@
-import "./App.css";
+import "./Checker.css";
 import TableHttp from "./TableHttp/TableHttp";
 import "antd/dist/antd.css";
 
 
-const App = () => {
+const Checker = () => {
   return (
     <div className="wrapper">
       <TableHttp />
@@ -11,4 +11,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Checker;

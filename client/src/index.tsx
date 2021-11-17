@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./Components/App";
+import Checker from "./Components/Checker";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Checker />, document.getElementById("root"));
