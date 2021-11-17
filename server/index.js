@@ -21,8 +21,7 @@ app.use("/", dbRoute);
       console.log(`Server listens http://${HOST}:${PORT}`);
     });
   } catch (e) {
-    console.log("Server Error", e.message);
-    mongoose.disconnect();
+    console.log("Server Error", e.message);    
     process.exit(1);
   }
 })();
