@@ -3,10 +3,11 @@ import { queryDataBase, queryUrl } from "../../core/query";
 import { Input, Space, Spin } from "antd";
 import Cards from "./Cards/Cards";
 import "./TableHttp.css";
+import isRepeatUrl from "../../core/service/checkInBase";
 
 const TableHttp = () => {
   const { Search } = Input;
- 
+
   const [data, setData] = useState(undefined);
   const [url, setUrl] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
@@ -23,7 +24,7 @@ const TableHttp = () => {
   console.log(data);
 
   useEffect(() => {
-    if (url) {
+    if (url && isRepeatUrl(data, url)) {
       setIsLoaded(true);
       queryUrl(url).then((res) => {
         setData((prev) => (prev ? [...prev, res.data] : [res.data]));

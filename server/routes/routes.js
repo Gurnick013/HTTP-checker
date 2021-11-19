@@ -23,10 +23,9 @@ router.get("/", (req, res) => {
           },
           (err, data) => {
             if (err) return console.log(err);
-
-            console.log("Сохранен объект", data);
+            console.log("Saved obj", data);
           }
-        );      
+        );
         res.json({
           url: req.query.url,
           statusCode: response.statusCode,
@@ -38,8 +37,24 @@ router.get("/", (req, res) => {
 
 router.get("/db", (req, res) => {
   Status.find({}, (err, data) => {
-    if (err) return console.log(err);
-    res.json(unique(data));
+    if (err) return console.log(err);    
+    // const result = [];
+    // data.map(async (el) =>
+    //   request(el.url, (err, response) => {
+    //     // if (err) return res.json(ERR);
+    //     console.log(el.url);
+    //     const date = new Date();
+    //     result.push({
+    //       url: req.query.url,
+    //       statusCode: response.statusCode,
+    //       statusMessage: response.statusMessage,
+    //       // data: date.now(),
+    //     });
+    //   })
+    // );
+   
+    // console.log(result);
+    res.json(data);    
   });
 });
 
