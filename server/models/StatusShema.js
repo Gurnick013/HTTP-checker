@@ -11,6 +11,9 @@ const StatusShema = mongoose.Schema(
     statusMessage: {
       type: String,
     },
+    update: {
+      type: String,
+    },
   },
   { versionKey: false }
 );

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { queryDataBase, queryUrl } from "../../core/query";
+import React , { useEffect, useState } from "react";
+import {deleteDataBaseItem, queryDataBase, queryUrl} from "../../core/query";
 import { Input, Space, Spin } from "antd";
 import Cards from "./Cards/Cards";
 import "./TableHttp.css";
@@ -11,6 +11,7 @@ const TableHttp = () => {
   const [data, setData] = useState(undefined);
   const [url, setUrl] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
+  const [item, setItem] = useState('')
   const onSearch = (value) => setUrl(value);
 
   useEffect(() => {
@@ -20,8 +21,6 @@ const TableHttp = () => {
       setIsLoaded(false);
     });
   }, []);
-
-  console.log(data);
 
   useEffect(() => {
     if (url && isRepeatUrl(data, url)) {
@@ -33,6 +32,14 @@ const TableHttp = () => {
     }
   }, [url]);
 
+  useEffect(()=> {
+   if(item) {
+       deleteDataBaseItem(item).then((res)=>{
+       setData(res.data);
+     })
+   }
+  }, [item])
+
   return (
     <>
       <h1 className="title">HTTP-Checker</h1>
@@ -43,12 +50,8 @@ const TableHttp = () => {
           enterButton
         />
       </Space>
-      {!isLoaded ? (
-        <div>{data && <Cards data={data} />}</div>
-      ) : (
-        <Spin className="spin" />
-      )}
-    </>
+      {data && !isLoaded ? <Cards data={data} setItem={setItem}/> : <Spin id="spin" />}
+     </>
   );
 };
 
