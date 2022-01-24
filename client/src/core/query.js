@@ -16,3 +16,11 @@ export const queryDataBase = async () => {
   }
 };
 
+export const deleteDataBaseItem = async (item) => {
+  try {
+    return await axios.get(`http://localhost:3000/del/?item=${item}`);
+  } catch (e) {
+    console.log(`Error! ${e}`);
+  }
+};
+
