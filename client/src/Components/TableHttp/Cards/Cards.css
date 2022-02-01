@@ -1,0 +1,8 @@
+.cards {
+  display: flex;
+  padding: 10px 0px;
+}
+
+.cards__item {
+  width: 15rem;
+}
